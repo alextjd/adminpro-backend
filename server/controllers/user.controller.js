@@ -1,16 +1,22 @@
-import User from "../models/user.model";
+import { createUser, getAllUsers } from "../services/user.service";
 
-export const getAllUsers = async (req, res) => {
-  const users = await User.find();
-  res.json({ ok: true, users });
+export const getAllUsersCtrl = async (req, res) => {
+  try {
+    const users = await getAllUsers();
+    res.json({ ok: true, users });
+  } catch (error) {
+    res.sendStatus(500);
+  }
 };
 
-export const createUser = async (req, res) => {
-  const { name, email, password } = req.body;
-  const user = new User(req.body);
-  await user.save();
-  res.json({
-    ok: true,
-    user,
-  });
+export const createUserCtrl = async (req, res) => {
+  try {
+    const user = await createUser(req.body);
+    res.json({
+      ok: true,
+      user,
+    });
+  } catch (error) {
+    res.sendStatus(500);
+  }
 };
