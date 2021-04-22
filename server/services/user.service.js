@@ -10,10 +10,8 @@ export const getAllUsers = async () => {
 
 export const createUser = async (user) => {
   try {
-    const newUser = new User(user);
-    return await newUser.save();
+    return await User.create(user);
   } catch (error) {
-    console.error(error);
     throw new Error(error);
   }
 };
