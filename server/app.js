@@ -1,7 +1,8 @@
 import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import logger from 'morgan';
@@ -10,7 +11,6 @@ import path from 'path';
 import { databaseConnection } from './database/config';
 import indexRouter from './routes/index.routes';
 import usersRouter from './routes/user.routes';
-import cors from 'cors';
 
 // Core initialization
 dotenv.config();

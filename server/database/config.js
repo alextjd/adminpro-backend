@@ -7,8 +7,10 @@ export const databaseConnection = async () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
-    console.info('Database connection successful.');
+    // console.info('Database connection successful.');
   } catch (error) {
     throw new Error('Could not connect to the database.');
   }
 };
+
+export const su = 'su';

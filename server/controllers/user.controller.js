@@ -17,7 +17,6 @@ export const createUserCtrl = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.error(error);
     res.sendStatus(500);
   }
 };
