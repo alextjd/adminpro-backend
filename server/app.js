@@ -10,11 +10,13 @@ import path from "path";
 import { databaseConnection } from "./database/config";
 import indexRouter from "./routes";
 import usersRouter from "./routes/users";
+import cors from "cors";
 
 dotenv.config();
-var app = express();
+const app = express();
 databaseConnection();
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
