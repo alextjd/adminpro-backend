@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const databaseConnection = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/database-facherita", {
+    await mongoose.connect(process.env.DATABASE_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
