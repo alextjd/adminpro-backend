@@ -4,7 +4,7 @@ import {
   getAllUsers,
   getUser,
   getUserById,
-  isValidObjectId,
+  isValidIdentifier,
   updateUser,
 } from '../services/user.service';
 import errorMessages from '../utils/error.constants';
@@ -41,7 +41,7 @@ export const updateUserCtrl = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   try {
-    if (!isValidObjectId(id)) {
+    if (!isValidIdentifier(id)) {
       return res.status(400).send({ error: errorMessages.badRequest });
     }
     const user = await getUserById(id);

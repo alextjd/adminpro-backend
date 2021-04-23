@@ -27,7 +27,7 @@ export const updateUser = async (id, user) => {
 };
 
 // TODO: move this to shared folder
-export const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+export const isValidIdentifier = (id) => mongoose.Types.ObjectId.isValid(id);
 
 export const getUser = async (query) => {
   try {
