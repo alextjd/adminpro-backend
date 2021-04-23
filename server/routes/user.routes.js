@@ -1,4 +1,5 @@
 import express from 'express';
+import { check } from 'express-validator';
 
 import {
   getAllUsersCtrl,
@@ -9,7 +10,16 @@ const router = express.Router();
 
 // Get all users
 router.get('/', getAllUsersCtrl);
+
 // Create user
-router.post('/', createUserCtrl);
+router.post(
+  '/',
+  [
+    check('name').notEmpty(),
+    check('password').notEmpty(),
+    check('email').isEmail(),
+  ],
+  createUserCtrl
+);
 
 export default router;
