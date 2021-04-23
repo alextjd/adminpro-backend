@@ -26,6 +26,7 @@
     "camelcase": "warn",
     "no-var": "error",
     "endOfLine": "off",
-    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+    "consistent-return": "warn",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "next" }]
   }
 }
