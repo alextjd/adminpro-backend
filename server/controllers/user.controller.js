@@ -1,4 +1,9 @@
-import { createUser, getAllUsers, getUser } from '../services/user.service';
+import {
+  createUser,
+  encryptPassword,
+  getAllUsers,
+  getUser,
+} from '../services/user.service';
 
 export const getAllUsersCtrl = async (req, res) => {
   try {
@@ -12,15 +17,18 @@ export const getAllUsersCtrl = async (req, res) => {
 
 export const createUserCtrl = async (req, res) => {
   try {
-    const user = await getUser({ email: req.email });
-    if (user !== undefined) {
+    const user = req.body;
+    const foundUser = await getUser({ email: user.email });
+    if (foundUser) {
       return res.sendStatus(400);
     }
-    const newUser = await createUser(req.body);
+    user.password = encryptPassword(user.password);
+    const newUser = await createUser(user);
     return res.json({
-      newUser,
+      user: newUser,
     });
   } catch (error) {
+    console.log(error);
     return res.sendStatus(500);
   }
 };

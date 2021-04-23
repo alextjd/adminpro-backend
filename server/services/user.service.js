@@ -1,3 +1,4 @@
+import { genSaltSync, hashSync } from 'bcryptjs';
 import User from '../models/user.model';
 
 export const getAllUsers = async () => {
@@ -18,8 +19,13 @@ export const createUser = async (user) => {
 
 export const getUser = async (query) => {
   try {
-    return await User.find(query);
+    return await User.findOne(query);
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const encryptPassword = (password) => {
+  const salt = genSaltSync();
+  return hashSync(password, salt);
 };

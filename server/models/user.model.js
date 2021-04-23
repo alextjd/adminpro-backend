@@ -12,6 +12,7 @@ const UserSchema = new Schema({
 // eslint-disable-next-line func-names
 UserSchema.method('toJSON', function () {
   const user = this.toObject({ versionKey: false });
+  delete user.password;
   return user;
 });
 
