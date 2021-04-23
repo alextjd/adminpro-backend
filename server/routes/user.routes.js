@@ -4,6 +4,7 @@ import { check } from 'express-validator';
 import {
   createUserCtrl,
   getAllUsersCtrl,
+  updateUserCtrl,
 } from '../controllers/user.controller';
 import { validateFields } from '../middlewares/validator.middleware';
 
@@ -22,6 +23,18 @@ router.post(
     validateFields,
   ],
   createUserCtrl
+);
+
+// Update user by id
+router.put(
+  '/:id',
+  [
+    check('name').notEmpty(),
+    check('role').notEmpty(),
+    check('email').isEmail(),
+    validateFields,
+  ],
+  updateUserCtrl
 );
 
 export default router;
