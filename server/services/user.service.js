@@ -15,3 +15,11 @@ export const createUser = async (user) => {
     throw new Error(error);
   }
 };
+
+export const getUser = async (query) => {
+  try {
+    return await User.find(query);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
