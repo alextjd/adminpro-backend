@@ -2,10 +2,10 @@ import {
   createUser,
   encryptPassword,
   getAllUsers,
-  getUser,
   getUserById,
   isValidIdentifier,
   updateUser,
+  userAlreadyExists,
 } from '../services/user.service';
 import errorMessages from '../utils/error.constants';
 
@@ -22,9 +22,9 @@ export const getAllUsersCtrl = async (req, res) => {
 export const createUserCtrl = async (req, res) => {
   try {
     const user = req.body;
-    const foundUser = await getUser({ email: user.email });
-    if (foundUser) {
-      return res.status(400).send({ error: errorMessages.userAlreadyExists });
+    const isEmailTaken = await userAlreadyExists({ email: user.email });
+    if (isEmailTaken) {
+      return res.status(400).send({ error: errorMessages.emailAlreadyExists });
     }
     user.password = encryptPassword(user.password);
     const newUser = await createUser(user);
@@ -52,8 +52,8 @@ export const updateUserCtrl = async (req, res) => {
       delete body.email;
     }
     if (body.email) {
-      const foundUser = await getUser({ email: user.email });
-      if (foundUser) {
+      const isEmailTaken = await userAlreadyExists({ email: user.email });
+      if (isEmailTaken) {
         return res
           .status(400)
           .send({ error: errorMessages.emailAlreadyExists });
