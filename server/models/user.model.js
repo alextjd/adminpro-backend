@@ -9,4 +9,10 @@ const UserSchema = new Schema({
   google: { type: Boolean, default: false },
 });
 
+// eslint-disable-next-line func-names
+UserSchema.method('toJSON', function () {
+  const user = this.toObject({ versionKey: false });
+  return user;
+});
+
 export default model('User', UserSchema);
