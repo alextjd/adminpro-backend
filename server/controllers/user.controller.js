@@ -8,25 +8,25 @@ import {
   updateUser,
   userAlreadyExists,
 } from '../services/user.service';
-import errorMessages from '../utils/error.constants';
-import infoMessages from '../utils/info.constants';
+import errorMessages from '../utils/constants/error.constants';
+import infoMessages from '../utils/constants/info.constants';
+import { BadRequestError, NotFoundError } from '../utils/errors/error';
 
-export const getAllUsersCtrl = async (req, res) => {
+export const getAllUsersCtrl = async (req, res, next) => {
   try {
     const users = await getAllUsers();
     return res.json({ users });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: errorMessages.internalServerError });
+    return next(error);
   }
 };
 
-export const createUserCtrl = async (req, res) => {
+export const createUserCtrl = async (req, res, next) => {
   try {
     const user = req.body;
     const isEmailTaken = await userAlreadyExists({ email: user.email });
     if (isEmailTaken) {
-      return res.status(400).json({ error: errorMessages.emailAlreadyExists });
+      throw new BadRequestError(errorMessages.emailAlreadyExists);
     }
     user.password = encryptPassword(user.password);
     const newUser = await createUser(user);
@@ -34,22 +34,21 @@ export const createUserCtrl = async (req, res) => {
       user: newUser,
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: errorMessages.internalServerError });
+    return next(error);
   }
 };
 
-export const updateUserCtrl = async (req, res) => {
+export const updateUserCtrl = async (req, res, next) => {
   // TODO: Validar si el user que updatea es el propio user o un admin
   const { id } = req.params;
   const { body } = req;
   try {
     if (!isValidIdentifier(id)) {
-      return res.status(400).json({ error: errorMessages.badRequest });
+      throw new BadRequestError();
     }
     const user = await getUserById(id);
     if (!user) {
-      return res.status(404).json({ error: errorMessages.notFound });
+      throw new NotFoundError();
     }
     if (user.email === body.email) {
       delete body.email;
@@ -57,9 +56,7 @@ export const updateUserCtrl = async (req, res) => {
     if (body.email) {
       const isEmailTaken = await userAlreadyExists({ email: user.email });
       if (isEmailTaken) {
-        return res
-          .status(400)
-          .json({ error: errorMessages.emailAlreadyExists });
+        throw new BadRequestError(errorMessages.emailAlreadyExists);
       }
     }
     delete body.google;
@@ -67,26 +64,24 @@ export const updateUserCtrl = async (req, res) => {
     const updatedUser = await updateUser(id, body);
     return res.status(201).json({ user: updatedUser });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: errorMessages.internalServerError });
+    return next(error);
   }
 };
 
-export const deleteUserCtrl = async (req, res) => {
+export const deleteUserCtrl = async (req, res, next) => {
   // TODO: Validar si el user que updatea es el propio user o un admin
   const { id } = req.params;
   try {
     if (!isValidIdentifier(id)) {
-      return res.status(400).json({ error: errorMessages.badRequest });
+      throw new BadRequestError();
     }
     const userExists = await userAlreadyExists({ _id: id });
     if (!userExists) {
-      return res.status(404).json({ error: errorMessages.notFound });
+      throw new NotFoundError();
     }
     await deleteUser(id);
     return res.status(200).json({ message: infoMessages.deleted, userId: id });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: errorMessages.internalServerError });
+    return next(error);
   }
 };

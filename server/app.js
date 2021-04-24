@@ -1,5 +1,4 @@
 import 'core-js/stable';
-// import 'regenerator-runtime/runtime';
 
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -11,6 +10,7 @@ import path from 'path';
 import { databaseConnection } from './database/config';
 import indexRouter from './routes/index.routes';
 import usersRouter from './routes/user.routes';
+import handleError from './middlewares/error-handler.middleware';
 
 // Core initialization
 dotenv.config();
@@ -30,5 +30,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Routes
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
+
+// Exception handler
+app.use(handleError);
 
 export default app;
