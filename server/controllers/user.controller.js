@@ -1,3 +1,4 @@
+import createJWT from '../helpers/jwt';
 import { encrypt } from '../services/auth.service';
 import {
   createUser,
@@ -30,8 +31,10 @@ export const createUserCtrl = async (req, res, next) => {
     }
     user.password = encrypt(user.password);
     const newUser = await createUser(user);
+    const token = await createJWT({ id: newUser._id, email: newUser.email });
     return res.json({
       user: newUser,
+      token,
     });
   } catch (error) {
     return next(error);

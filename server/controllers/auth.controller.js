@@ -18,7 +18,7 @@ const loginCtrl = async (req, res, next) => {
     const token = await createJWT({ id: user._id, email: user.email });
     return res.json({ token });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
