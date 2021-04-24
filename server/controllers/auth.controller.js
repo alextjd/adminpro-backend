@@ -1,3 +1,4 @@
+import createJWT from '../helpers/jwt';
 import { compareEncrypted } from '../services/auth.service';
 import { getUser } from '../services/user.service';
 import errorMessages from '../utils/constants/error.constants';
@@ -10,10 +11,12 @@ const loginCtrl = async (req, res, next) => {
     if (!user) {
       throw new BadRequestError(errorMessages.login);
     }
-    const isValidPassword = compareEncrypted(user.password, password);
+    const isValidPassword = compareEncrypted(password, user.password);
     if (!isValidPassword) {
       throw new BadRequestError(errorMessages.login);
     }
+    const token = await createJWT({ id: user._id, email: user.email });
+    return res.json({ token });
   } catch (error) {
     next(error);
   }

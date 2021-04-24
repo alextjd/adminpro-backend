@@ -7,8 +7,6 @@ export class GeneralError extends Error {
   constructor(message = errorMessages.internalServerError) {
     super(message);
     this.message = message;
-    // eslint-disable-next-line no-console
-    console.log(this.message);
   }
 
   getCode() {

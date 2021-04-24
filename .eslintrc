@@ -26,6 +26,7 @@
     "camelcase": "warn",
     "no-var": "error",
     "endOfLine": "off",
+    "no-underscore-dangle": "off",
     "consistent-return": "warn",
     "no-unused-vars": ["warn", { "argsIgnorePattern": "next" }]
   }
