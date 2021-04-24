@@ -43,6 +43,14 @@ export const updateUser = async (id, user) => {
   }
 };
 
+export const deleteUser = async (id) => {
+  try {
+    return await User.findByIdAndDelete(id);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const userAlreadyExists = async (query) => {
   try {
     const user = await getUser(query);

@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 
 import {
   createUserCtrl,
+  deleteUserCtrl,
   getAllUsersCtrl,
   updateUserCtrl,
 } from '../controllers/user.controller';
@@ -36,5 +37,8 @@ router.put(
   ],
   updateUserCtrl
 );
+
+// Delete user by id
+router.delete('/:id', deleteUserCtrl);
 
 export default router;
