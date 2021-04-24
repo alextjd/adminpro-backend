@@ -10,6 +10,7 @@ import path from 'path';
 import { databaseConnection } from './database/config';
 import indexRouter from './routes/index.routes';
 import usersRouter from './routes/user.routes';
+import authRouter from './routes/auth.routes';
 import handleError from './middlewares/error-handler.middleware';
 
 // Core initialization
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Routes
 app.use('/api', indexRouter);
+app.use('/api/login', authRouter);
 app.use('/api/users', usersRouter);
 
 // Exception handler

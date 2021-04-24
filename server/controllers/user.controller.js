@@ -1,7 +1,7 @@
+import { encrypt } from '../services/auth.service';
 import {
   createUser,
   deleteUser,
-  encryptPassword,
   getAllUsers,
   getUserById,
   isValidIdentifier,
@@ -28,7 +28,7 @@ export const createUserCtrl = async (req, res, next) => {
     if (isEmailTaken) {
       throw new BadRequestError(errorMessages.emailAlreadyExists);
     }
-    user.password = encryptPassword(user.password);
+    user.password = encrypt(user.password);
     const newUser = await createUser(user);
     return res.json({
       user: newUser,

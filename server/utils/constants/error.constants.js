@@ -9,6 +9,7 @@ const errorMessages = {
   emailAlreadyExists:
     'The chosen email is already taken. Please choose another one.',
   userAlreadyExists: 'This user already exists.',
+  login: 'Invalid login credentials.',
 };
 
 export default errorMessages;

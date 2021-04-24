@@ -1,4 +1,3 @@
-import { genSaltSync, hashSync } from 'bcryptjs';
 import mongoose from 'mongoose';
 import User from '../models/user.model';
 import isNil from '../utils/types.utils';
@@ -62,8 +61,3 @@ export const userAlreadyExists = async (query) => {
 
 // TODO: move this to shared folder
 export const isValidIdentifier = (id) => mongoose.Types.ObjectId.isValid(id);
-
-export const encryptPassword = (password) => {
-  const salt = genSaltSync();
-  return hashSync(password, salt);
-};
