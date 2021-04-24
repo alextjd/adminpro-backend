@@ -6,7 +6,7 @@ const createJWT = (data) =>
     sign(
       payload,
       process.env.TOKEN_KEY,
-      { expiresIn: '24' },
+      { expiresIn: '72h' },
       (error, token) => {
         if (error) {
           reject(error);

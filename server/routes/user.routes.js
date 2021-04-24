@@ -7,17 +7,19 @@ import {
   getAllUsersCtrl,
   updateUserCtrl,
 } from '../controllers/user.controller';
+import validateJWT from '../middlewares/jwt.middleware';
 import { validateFields } from '../middlewares/validator.middleware';
 
 const router = express.Router();
 
 // Get all users
-router.get('/', getAllUsersCtrl);
+router.get('/', validateJWT, getAllUsersCtrl);
 
 // Create user
 router.post(
   '/',
   [
+    validateJWT,
     check('name').notEmpty(),
     check('password').notEmpty(),
     check('email').isEmail(),
@@ -30,6 +32,7 @@ router.post(
 router.put(
   '/:id',
   [
+    validateJWT,
     check('name').notEmpty(),
     check('role').notEmpty(),
     check('email').isEmail(),
@@ -39,6 +42,6 @@ router.put(
 );
 
 // Delete user by id
-router.delete('/:id', deleteUserCtrl);
+router.delete('/:id', validateJWT, deleteUserCtrl);
 
 export default router;
