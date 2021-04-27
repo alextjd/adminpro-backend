@@ -10,7 +10,7 @@ const validateJWT = (req, res, next) => {
     verify(token, process.env.TOKEN_KEY);
     next();
   } catch (error) {
-    next(error);
+    throw new UnauthorizedError();
   }
 };
 
