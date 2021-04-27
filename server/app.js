@@ -10,6 +10,8 @@ import path from 'path';
 import { databaseConnection } from './database/config';
 import indexRouter from './routes/index.routes';
 import usersRouter from './routes/user.routes';
+import hospitalsRouter from './routes/hospital.routes';
+import doctorsRouter from './routes/doctor.routes';
 import authRouter from './routes/auth.routes';
 import handleError from './middlewares/error-handler.middleware';
 
@@ -31,7 +33,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Routes
 app.use('/api', indexRouter);
 app.use('/api/login', authRouter);
-app.use('/api/users', usersRouter);
+app.use('/api/user', usersRouter);
+app.use('/api/hospital', hospitalsRouter);
+app.use('/api/doctor', doctorsRouter);
 
 // Exception handler
 app.use(handleError);
