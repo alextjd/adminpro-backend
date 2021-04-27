@@ -64,6 +64,7 @@
   },
   "scripts": {
     "start": "npm run prod",
+    "start:dev": "nodemon",
     "build": "npm-run-all clean transpile",
     "lint": "eslint --ext .js --ignore-path .gitignore .",
     "server": "node ./dist-server/bin/www",
@@ -71,7 +72,6 @@
     "prod": "cross-env NODE_ENV=production npm-run-all build server",
     "transpile": "babel ./server --out-dir dist-server",
     "clean": "rimraf dist-server",
-    "watch:dev": "nodemon",
     "test": "jest"
   }
 }
