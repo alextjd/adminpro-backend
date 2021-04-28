@@ -1,4 +1,4 @@
-import Doctor from '../models/doctor';
+import Doctor from '../models/doctor.model';
 
 export const getAllDoctors = async () => {
   try {
