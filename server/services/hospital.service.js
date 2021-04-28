@@ -1,4 +1,4 @@
-import Hospital from '../models/hospital';
+import Hospital from '../models/hospital.model';
 
 export const getAllHospitals = async () => {
   try {
