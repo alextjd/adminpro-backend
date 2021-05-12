@@ -2,7 +2,7 @@ import Doctor from '../models/doctor.model';
 
 export const getAllDoctors = async () => {
   try {
-    return await Doctor.find();
+    return await Doctor.find().populate('creator', 'name img');
   } catch (error) {
     throw new Error(error);
   }

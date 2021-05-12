@@ -1,8 +1,9 @@
-import { createDoctor } from '../services/doctor.service';
+import { createDoctor, getAllDoctors } from '../services/doctor.service';
 
 export const getAllDoctorsCtrl = async (req, res, next) => {
   try {
-    return res.json();
+    const doctors = await getAllDoctors();
+    return res.json(doctors);
   } catch (error) {
     return next(error);
   }
