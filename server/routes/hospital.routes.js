@@ -7,6 +7,7 @@ import {
   updateHospitalCtrl,
 } from '../controllers/hospital.controller';
 import validateJWT from '../middlewares/jwt.middleware';
+import { validateFields } from '../middlewares/validator.middleware';
 
 const router = Router();
 
@@ -14,7 +15,11 @@ const router = Router();
 router.get('/', validateJWT, getAllHospitalsCtrl);
 
 // Create hospital
-router.post('/', [validateJWT, check('name').notEmpty()], createHospitalCtrl);
+router.post(
+  '/',
+  [validateJWT, check('name').notEmpty(), validateFields],
+  createHospitalCtrl
+);
 
 // Update hospital by id
 router.put('/:id', [validateJWT], updateHospitalCtrl);
