@@ -1,3 +1,5 @@
+import { createDoctor } from '../services/doctor.service';
+
 export const getAllDoctorsCtrl = async (req, res, next) => {
   try {
     return res.json();
@@ -8,7 +10,11 @@ export const getAllDoctorsCtrl = async (req, res, next) => {
 
 export const createDoctorCtrl = async (req, res, next) => {
   try {
-    return res.json();
+    const { uid } = req;
+    const doctor = req.body;
+    doctor.creator = uid;
+    const newDoctor = await createDoctor(doctor);
+    return res.json({ doctor: newDoctor });
   } catch (error) {
     return next(error);
   }
