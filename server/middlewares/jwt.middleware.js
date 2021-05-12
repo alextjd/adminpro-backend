@@ -7,7 +7,8 @@ const validateJWT = (req, res, next) => {
     throw new UnauthorizedError();
   }
   try {
-    verify(token, process.env.TOKEN_KEY);
+    const { uid } = verify(token, process.env.TOKEN_KEY);
+    req.uid = uid;
     next();
   } catch (error) {
     throw new UnauthorizedError();

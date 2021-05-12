@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { check } from 'express-validator';
 import {
   createHospitalCtrl,
   deleteHospitalCtrl,
@@ -13,7 +14,7 @@ const router = Router();
 router.get('/', validateJWT, getAllHospitalsCtrl);
 
 // Create hospital
-router.post('/', [validateJWT], createHospitalCtrl);
+router.post('/', [validateJWT, check('name').notEmpty()], createHospitalCtrl);
 
 // Update hospital by id
 router.put('/:id', [validateJWT], updateHospitalCtrl);

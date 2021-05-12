@@ -15,7 +15,7 @@ const loginCtrl = async (req, res, next) => {
     if (!isValidPassword) {
       throw new BadRequestError(errorMessages.login);
     }
-    const token = await createJWT({ id: user._id, email: user.email });
+    const token = await createJWT({ uid: user._id, email: user.email });
     return res.json({ token });
   } catch (error) {
     return next(error);

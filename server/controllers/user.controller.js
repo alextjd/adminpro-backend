@@ -31,7 +31,7 @@ export const createUserCtrl = async (req, res, next) => {
     }
     user.password = encrypt(user.password);
     const newUser = await createUser(user);
-    const token = await createJWT({ id: newUser._id, email: newUser.email });
+    const token = await createJWT({ uid: newUser._id, email: newUser.email });
     return res.json({
       user: newUser,
       token,
