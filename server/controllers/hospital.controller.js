@@ -1,8 +1,9 @@
-import { createHospital } from '../services/hospital.service';
+import { createHospital, getAllHospitals } from '../services/hospital.service';
 
 export const getAllHospitalsCtrl = async (req, res, next) => {
   try {
-    return res.json();
+    const hospitals = await getAllHospitals();
+    return res.json(hospitals);
   } catch (error) {
     return next(error);
   }

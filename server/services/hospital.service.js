@@ -2,7 +2,7 @@ import Hospital from '../models/hospital.model';
 
 export const getAllHospitals = async () => {
   try {
-    return await Hospital.find();
+    return await Hospital.find().populate('creator', 'name img');
   } catch (error) {
     throw new Error(error);
   }
