@@ -6,8 +6,10 @@ export const databaseConnection = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      serverSelectionTimeoutMS: 3000,
     });
-    // console.info('Database connection successful.');
+    // eslint-disable-next-line no-console
+    console.info('Database connection successful.');
   } catch (error) {
     throw new Error('Could not connect to the database.');
   }
