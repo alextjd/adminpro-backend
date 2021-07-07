@@ -25,10 +25,6 @@ export const getAllUsersCtrl = async (req, res, next) => {
 export const createUserCtrl = async (req, res, next) => {
   try {
     const user = req.body;
-    const isEmailTaken = await userAlreadyExists({ email: user.email });
-    if (isEmailTaken) {
-      throw new BadRequestError(errorMessages.emailAlreadyExists);
-    }
     user.password = encrypt(user.password);
     const newUser = await createUser(user);
     const token = await createJWT({ uid: newUser._id, email: newUser.email });

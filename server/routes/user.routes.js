@@ -7,8 +7,10 @@ import {
   getAllUsersCtrl,
   updateUserCtrl,
 } from '../controllers/user.controller';
+import emailAlreadyTaken from '../middlewares/email-already-taken.middleware';
 import validateJWT from '../middlewares/jwt.middleware';
 import { validateFields } from '../middlewares/validator.middleware';
+import errorMessages from '../utils/constants/error.constants';
 
 const router = express.Router();
 
@@ -23,6 +25,9 @@ router.post(
     check('name').notEmpty(),
     check('password').notEmpty(),
     check('email').isEmail(),
+    check('email')
+      .custom(emailAlreadyTaken)
+      .withMessage(errorMessages.emailAlreadyExists),
     validateFields,
   ],
   createUserCtrl
