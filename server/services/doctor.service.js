@@ -8,6 +8,14 @@ export const getAllDoctors = async () => {
   }
 };
 
+export const getDoctor = async (query) => {
+  try {
+    return await Doctor.findOne(query);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const createDoctor = async (doctor) => {
   try {
     return await Doctor.create(doctor);
@@ -30,4 +38,9 @@ export const deleteDoctor = async (id) => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const searchDoctor = async (name) => {
+  const regExp = new RegExp(name, 'i');
+  return getDoctor({ name: regExp });
 };

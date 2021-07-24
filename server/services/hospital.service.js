@@ -8,6 +8,14 @@ export const getAllHospitals = async () => {
   }
 };
 
+export const getHospital = async (query) => {
+  try {
+    return await Hospital.findOne(query);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const createHospital = async (hospital) => {
   try {
     return await Hospital.create(hospital);
@@ -30,4 +38,9 @@ export const deleteHospital = async (id) => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const searchHospital = async (name) => {
+  const regExp = new RegExp(name, 'i');
+  return getHospital({ name: regExp });
 };
