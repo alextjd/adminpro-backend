@@ -8,12 +8,13 @@ import logger from 'morgan';
 import path from 'path';
 
 import { databaseConnection } from './database/config';
-import indexRouter from './routes/index.routes';
-import usersRouter from './routes/user.routes';
-import hospitalsRouter from './routes/hospital.routes';
-import doctorsRouter from './routes/doctor.routes';
-import authRouter from './routes/auth.routes';
 import handleError from './middlewares/error-handler.middleware';
+import authRouter from './routes/auth.routes';
+import doctorsRouter from './routes/doctor.routes';
+import hospitalsRouter from './routes/hospital.routes';
+import indexRouter from './routes/index.routes';
+import searchRouter from './routes/search.routes';
+import usersRouter from './routes/user.routes';
 
 // Core initialization
 dotenv.config();
@@ -36,6 +37,7 @@ app.use('/api/login', authRouter);
 app.use('/api/user', usersRouter);
 app.use('/api/hospital', hospitalsRouter);
 app.use('/api/doctor', doctorsRouter);
+app.use('/api/search', searchRouter);
 
 // Exception handler
 app.use(handleError);
