@@ -1,12 +1,7 @@
+import modelNames from '../utils/constants/models.constants';
 import { searchDoctor } from './doctor.service';
 import { searchHospital } from './hospital.service';
 import { searchUser } from './user.service';
-
-const modelNames = {
-  user: 'user',
-  doctor: 'doctor',
-  hospital: 'hospital',
-};
 
 const searchByCollection = async (collection, searchItem) => {
   let searchResults;

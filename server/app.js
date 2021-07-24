@@ -15,6 +15,7 @@ import hospitalsRouter from './routes/hospital.routes';
 import indexRouter from './routes/index.routes';
 import searchRouter from './routes/search.routes';
 import usersRouter from './routes/user.routes';
+import uploadRouter from './routes/upload.routes';
 
 // Core initialization
 dotenv.config();
@@ -38,6 +39,7 @@ app.use('/api/user', usersRouter);
 app.use('/api/hospital', hospitalsRouter);
 app.use('/api/doctor', doctorsRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/upload', uploadRouter);
 
 // Exception handler
 app.use(handleError);
