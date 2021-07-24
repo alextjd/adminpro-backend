@@ -11,6 +11,7 @@ const errorMessages = {
   userAlreadyExists: 'This user already exists.',
   login: 'Invalid login credentials.',
   unauthorized: 'Access denied. Please log in again to continue.',
+  invalidFile: 'The file that is being uploaded is invalid.',
 };
 
 export default errorMessages;
