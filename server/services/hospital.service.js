@@ -50,5 +50,5 @@ export const deleteHospital = async (id) => {
 
 export const searchHospital = async (name) => {
   const regExp = new RegExp(name, 'i');
-  return getHospital({ name: regExp });
+  return getHospitals({ name: regExp });
 };

@@ -50,5 +50,5 @@ export const deleteDoctor = async (id) => {
 
 export const searchDoctor = async (name) => {
   const regExp = new RegExp(name, 'i');
-  return getDoctor({ name: regExp });
+  return getDoctors({ name: regExp });
 };

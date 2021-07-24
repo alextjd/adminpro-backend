@@ -69,7 +69,7 @@ export const userAlreadyExists = async (query) => {
 
 export const searchUser = async (name) => {
   const regExp = new RegExp(name, 'i');
-  return getUser({ name: regExp });
+  return getUsers({ name: regExp });
 };
 
 // TODO: move this to shared folder
