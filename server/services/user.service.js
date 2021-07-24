@@ -26,6 +26,14 @@ export const getUser = async (query) => {
   }
 };
 
+export const getUsers = async (query) => {
+  try {
+    return await User.find(query);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const createUser = async (user) => {
   try {
     return await User.create(user);

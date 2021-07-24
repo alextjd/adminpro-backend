@@ -16,6 +16,14 @@ export const getHospital = async (query) => {
   }
 };
 
+export const getHospitals = async (query) => {
+  try {
+    return await Hospital.find(query);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const createHospital = async (hospital) => {
   try {
     return await Hospital.create(hospital);

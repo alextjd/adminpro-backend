@@ -16,6 +16,14 @@ export const getDoctor = async (query) => {
   }
 };
 
+export const getDoctors = async (query) => {
+  try {
+    return await Doctor.find(query);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const createDoctor = async (doctor) => {
   try {
     return await Doctor.create(doctor);
